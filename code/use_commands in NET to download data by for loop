@@ -1,0 +1,24 @@
+Public Class Form1
+    Dim i As Integer
+    Dim str, dst As String
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+
+
+        For i = 101 To 128
+
+            str = "http://www.liveabc.com/QR_book/pocket/JLPT543/" + i.ToString + ".mp3"
+            dst = "C:\Users\Surface_Kelvin\Desktop\file\" + i.ToString + ".mp3"
+            My.Computer.Network.DownloadFile(str, dst, "", "", True, 500, True)
+
+
+            'Threading.Thread.Sleep(5000)
+        Next
+
+
+
+
+        'My.Computer.Network.DownloadFile("http://www.liveabc.com/QR_book/pocket/JLPT543/001.mp3", "C:\Users\Surface_Kelvin\Desktop\file\001.mp3", "", "", True, 500, True)
+
+    End Sub
+End Class
