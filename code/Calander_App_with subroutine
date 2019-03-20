@@ -1,0 +1,143 @@
+Public Class Form1
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        If CheckBox9.Checked = True Then TextBox1.Multiline = True Else TextBox1.Multiline = False
+        TextBox1.Text = ""
+
+        Dim weeks As String() = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+        Dim chinWeeks As String() = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"}
+        Dim j As Integer
+        Dim index As Integer
+        Dim end_index As Integer
+        For j = 0 To 6
+            If weeks(j) = System.DateTime.Parse(DateTimePicker1.Text).DayOfWeek.ToString() Then
+                Label1.Text = chinWeeks(j)
+                index = j + 1
+
+            End If
+        Next
+        For j = 0 To 6
+            If weeks(j) = System.DateTime.Parse(DateTimePicker2.Text).DayOfWeek.ToString() Then
+                Label4.Text = chinWeeks(j)
+                end_index = j + 1
+
+            End If
+        Next
+
+        Dim between_Day, betweenWeek As Integer
+        between_Day = DateDiff("d", DateTimePicker1.Text, DateTimePicker2.Text)
+        Label2.Text = between_Day
+        betweenWeek = DateDiff("w", DateTimePicker1.Text, DateTimePicker2.Text)
+        Label3.Text = betweenWeek
+        '設定初始值
+        setInitial(index)
+        '設計迴圈
+        'Dim divide As Integer
+        If between_Day > 6 Then
+            If CheckBox8.Checked = True Then betweenWeek = (betweenWeek) / 2
+
+            For i = 1 To betweenWeek - 1
+                setRepeat(betweenWeek, index, i)
+            Next
+            ''設定結束日期
+            setEnd(between_Day, index, end_index)
+        End If
+        
+
+
+
+
+    End Sub
+    Sub setInitial(ByVal index As Integer)
+        If index < 2 Then setInitialDay(CheckBox1.Checked, index, 0)
+        If index < 3 Then setInitialDay(CheckBox2.Checked, index, 1)
+        If index < 4 Then setInitialDay(CheckBox3.Checked, index, 2)
+        If index < 5 Then setInitialDay(CheckBox4.Checked, index, 3)
+        If index < 6 Then setInitialDay(CheckBox5.Checked, index, 4)
+        If index < 7 Then setInitialDay(CheckBox6.Checked, index, 5)
+        If index < 8 Then setInitialDay(CheckBox7.Checked, index, 6)
+    End Sub
+    Sub setInitialDay(ByVal check As Boolean, ByVal index As Integer, ByVal move As Integer)
+        Dim shift As Integer = (8 - index + move) Mod 7
+        If check = True Then printDay(shift)
+        'printDay()
+    End Sub
+    Sub setRepeatedDay(ByVal check As Boolean, ByVal index As Integer, ByVal betweenWeek As Integer, ByVal weeks As Integer, ByVal counts As Integer)
+        Dim weeks_index_re As Integer
+        If CheckBox8.Checked = True Then weeks_index_re = 14 Else weeks_index_re = 7
+
+        Dim day As Integer = index - 1 + counts * weeks_index_re + weeks - 1
+        If check = True Then printDay(day)
+    End Sub
+    Sub setRepeat(ByVal betweenWeek As Integer, ByVal index As Integer, ByVal counts As Integer)
+        setRepeatedDay(CheckBox1.Checked, index, betweenWeek, 1, counts)
+        setRepeatedDay(CheckBox2.Checked, index, betweenWeek, 2, counts)
+        setRepeatedDay(CheckBox3.Checked, index, betweenWeek, 3, counts)
+        setRepeatedDay(CheckBox4.Checked, index, betweenWeek, 4, counts)
+        setRepeatedDay(CheckBox5.Checked, index, betweenWeek, 5, counts)
+        setRepeatedDay(CheckBox6.Checked, index, betweenWeek, 6, counts)
+        setRepeatedDay(CheckBox7.Checked, index, betweenWeek, 7, counts)
+    End Sub
+
+    Sub setEndDay(ByVal check As Boolean, ByVal index As Integer, ByVal end_index As Integer, ByVal between_Day As Integer, ByVal weeks As Integer)
+        If check = True Then
+            Dim days As Integer = between_Day - end_index + weeks
+            If CheckBox8.Checked = True Then
+                If Int(between_Day / 7) Mod 2 = 0 Then printDay(days)
+            Else
+                printDay(days)
+            End If
+
+
+
+        End If
+
+    End Sub
+    Sub setEnd(ByVal between_Day As Integer, ByVal index As Integer, ByVal end_index As Integer)
+
+        If end_index > 0 Then setEndDay(CheckBox1.Checked, index, end_index, between_Day, 1)
+        If end_index > 1 Then setEndDay(CheckBox2.Checked, index, end_index, between_Day, 2)
+        If end_index > 2 Then setEndDay(CheckBox3.Checked, index, end_index, between_Day, 3)
+        If end_index > 3 Then setEndDay(CheckBox4.Checked, index, end_index, between_Day, 4)
+        If end_index > 4 Then setEndDay(CheckBox5.Checked, index, end_index, between_Day, 5)
+        If end_index > 5 Then setEndDay(CheckBox6.Checked, index, end_index, between_Day, 6)
+        If end_index > 6 Then setEndDay(CheckBox7.Checked, index, end_index, between_Day, 7)
+
+
+    End Sub
+    Sub printDay(ByVal num As Integer)
+        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(num).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(num).Day.ToString + "、"
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+         TextBox1.Focus() 
+        TextBox1.SelectAll()
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        'TextBox1.Focus()
+        'TextBox1.SelectAll()
+        If TextBox1.SelectedText <> "" Then
+            Clipboard.SetDataObject(TextBox1.SelectedText)
+        Else
+            'TextBox2.Text = "No text selected in textBox1"
+        End If
+    End Sub
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+        'ass = True
+        'Button3.PerformClick()
+        TextBox1.Focus()
+        TextBox1.SelectAll()
+        If TextBox1.SelectedText <> "" Then
+            Clipboard.SetDataObject(TextBox1.SelectedText)
+        Else
+            'TextBox2.Text = "No text selected in textBox1"
+        End If
+    End Sub
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+End Class
