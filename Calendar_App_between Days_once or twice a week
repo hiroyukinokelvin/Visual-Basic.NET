@@ -1,0 +1,1224 @@
+
+
+Public Class Form1
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        If CheckBox8.Checked = True Then
+            check_index = 14
+        Else
+            check_index = 7
+        End If
+
+        TextBox1.Text = ""
+
+        Dim weeks As String() = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+        Dim chinWeeks As String() = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"}
+        Dim j As Integer
+        Dim index As Integer
+
+        For j = 0 To 6
+            If weeks(j) = System.DateTime.Parse(DateTimePicker1.Text).DayOfWeek.ToString() Then
+                Label2.Text = chinWeeks(j)
+                index = j + 1
+
+            End If
+        Next
+
+        Dim between_Day, betweenWeek As Integer
+        between_Day = DateDiff("d", DateTimePicker1.Text, DateTimePicker2.Text)
+        Label1.Text = between_Day
+        betweenWeek = DateDiff("w", DateTimePicker1.Text, DateTimePicker2.Text)
+        Label5.Text = betweenWeek
+        'between_Day = between_Day + 1
+
+
+
+        Dim index_select As Integer() = {0, 0, 0, 0, 0, 0, 0}
+        For k = 0 To 6
+            index_select(0) = (8 - index) Mod 7
+
+            index_select(1) = (8 - index + 1) Mod 7
+
+            index_select(2) = (8 - index + 2) Mod 7
+            index_select(3) = (8 - index + 3) Mod 7
+
+            index_select(4) = (8 - index + 4) Mod 7
+            index_select(5) = (8 - index + 5) Mod 7
+            index_select(6) = (8 - index + 6) Mod 7
+        Next
+        If Label2.Text = "星期一" Then
+
+            If CheckBox1.Checked = True Then
+                If between_Day >= 0 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 1 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox3.Checked = True Then
+                If between_Day >= 2 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 3 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox5.Checked = True Then
+                If between_Day >= 4 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 5 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 6 Then
+
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+                'mark
+                For i = 1 To between_Day / check_index - 1
+
+                    If CheckBox1.Checked = True Then
+
+                        'If CheckBox8.Checked = True Then If i Mod 2 = 0 Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * i).Day.ToString + "、"
+                        'If CheckBox8.Checked = False Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * i).Day.ToString + "、"
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+
+                    If CheckBox2.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+                Dim dex As Integer = 0
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If CheckBox8.Checked = True Then
+                    If (betweenWeek - 2) Mod 2 = 1 Then
+
+
+
+                        If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+                        If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + 7 * (betweenWeek - 1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + 7 * (betweenWeek - 1)).Day.ToString + "、"
+
+
+                    End If
+                End If
+
+            End If
+        End If
+
+
+        If Label2.Text = "星期二" Then
+
+
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox3.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox5.Checked = True Then
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            ''加入雙周功能
+            If CheckBox8.Checked = False Then
+                If CheckBox1.Checked = True Then
+                    If between_Day >= 6 Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                    End If
+                End If
+            End If
+            
+
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                '排除情況
+                'matk
+                For i = 1 To between_Day / check_index - 1
+                    'TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+
+                    ' TextBox1.Text += vbCrLf
+
+                Next
+
+            Dim dex As Integer = 1
+
+            If between_Day Mod check_index = 0 Then
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+            End If
+            If between_Day Mod check_index = 1 Then
+
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+            End If
+            If between_Day Mod check_index = 2 Then
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+            End If
+            If between_Day Mod check_index = 3 Then
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+            End If
+            If between_Day Mod check_index = 4 Then
+
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+            End If
+            If between_Day Mod check_index = 5 Then
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+            End If
+            If between_Day Mod check_index = 6 Then
+                If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+            End If
+        End If
+
+        End If
+
+        If Label2.Text = "星期三" Then
+
+
+
+            If CheckBox3.Checked = True Then
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox5.Checked = True Then
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox1.Checked = True Then
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 6 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                For i = 1 To between_Day / check_index - 1
+
+
+
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox1.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox2.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+
+                Dim dex As Integer = 2
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+            End If
+        End If
+
+        If Label2.Text = "星期四" Then
+
+
+
+            If CheckBox4.Checked = True Then
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox5.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox1.Checked = True Then
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox3.Checked = True Then
+                If between_Day >= 6 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                For i = 1 To between_Day / check_index - 1
+
+
+
+
+
+
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox1.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox2.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+                Dim dex As Integer = 3
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+            End If
+        End If
+
+        If Label2.Text = "星期五" Then
+
+
+
+
+
+
+            If CheckBox5.Checked = True Then
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox1.Checked = True Then
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox3.Checked = True Then
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 6 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                For i = 1 To between_Day / check_index - 1
+
+
+
+
+
+
+
+
+
+
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+
+
+
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox1.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox2.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+
+                Dim dex As Integer = 4
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+            End If
+        End If
+
+        If Label2.Text = "星期六" Then
+
+
+
+
+            If CheckBox6.Checked = True Then
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox1.Checked = True Then
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox3.Checked = True Then
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox5.Checked = True Then
+                If between_Day >= 6 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                For i = 1 To between_Day / check_index - 1
+
+
+
+
+
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox1.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox2.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+                Dim dex As Integer = 5
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+            End If
+        End If
+
+        If Label2.Text = "星期日" Then
+
+
+
+
+
+
+            If CheckBox7.Checked = True Then
+                If between_Day >= 0 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox1.Checked = True Then
+                If between_Day >= 1 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0)).Day.ToString + "、"
+                End If
+            End If
+            If CheckBox2.Checked = True Then
+
+                If between_Day >= 2 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1)).Day.ToString + "、"
+                End If
+
+            End If
+
+            If CheckBox3.Checked = True Then
+                If between_Day >= 3 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox4.Checked = True Then
+                If between_Day >= 4 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox5.Checked = True Then
+                If between_Day >= 5 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4)).Day.ToString + "、"
+                End If
+
+            End If
+            If CheckBox6.Checked = True Then
+                If between_Day >= 6 Then
+                    TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5)).Day.ToString + "、"
+                End If
+
+            End If
+            ' TextBox1.Text += vbCrLf
+
+            If between_Day >= 7 Then
+
+
+                For i = 1 To between_Day / check_index - 1
+
+                    If CheckBox7.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(6) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox1.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(0) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox2.Checked = True Then
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(1) + check_index * i).Day.ToString + "、"
+
+                    End If
+                    If CheckBox3.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(2) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+                    If CheckBox4.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(3) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox5.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(4) + check_index * i).Day.ToString + "、"
+                    End If
+                    If CheckBox6.Checked = True Then
+
+                        TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(5) + check_index * i).Day.ToString + "、"
+
+
+                    End If
+                    ' TextBox1.Text += vbCrLf
+                Next
+
+
+                Dim dex As Integer = 6
+
+                If between_Day Mod check_index = 0 Then
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 1 Then
+
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 2 Then
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 3 Then
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+                End If
+                If between_Day Mod check_index = 4 Then
+
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 5 Then
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+                If between_Day Mod check_index = 6 Then
+                    If CheckBox7.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 6).Day.ToString + "、"
+                    If CheckBox1.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 5).Day.ToString + "、"
+                    If CheckBox2.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 4).Day.ToString + "、"
+                    If CheckBox3.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 3).Day.ToString + "、"
+                    If CheckBox4.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 2).Day.ToString + "、"
+                    If CheckBox5.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index) - 1).Day.ToString + "、"
+                    If CheckBox6.Checked = True Then TextBox1.Text += DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Month.ToString + "/" + DateTime.Parse(DateTimePicker1.Text).AddDays(index_select(dex) + check_index * (between_Day / check_index)).Day.ToString + "、"
+
+                End If
+            End If
+        End If
+        '"從當天開始的天數:" &
+    End Sub
+    Dim check_index As Integer = 7
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      
+    End Sub
+
+    Private Sub Label2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub Label4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        TextBox1.Focus() 
+        TextBox1.SelectAll()
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        'TextBox1.Focus()
+        'TextBox1.SelectAll()
+        If TextBox1.SelectedText <> "" Then
+            Clipboard.SetDataObject(TextBox1.SelectedText)
+        Else
+            'TextBox2.Text = "No text selected in textBox1"
+        End If
+    End Sub
+
+    'Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
+    '    'tem.Windows.Forms.KeyEventArgs) Handles TextBox2.KeyDown
+    '    If ass = True Then
+
+
+    '        If e.KeyCode = Keys.A And Keys.Control = True Then
+    '            'MsgBox("ok")
+    '            Button2.PerformClick()
+    '        End If
+
+    '        If e.KeyCode = Keys.C And Keys.Control = True Then
+    '            'MsgBox("ok")
+    '            Button3.PerformClick()
+    '        End If
+    '    Else
+    '        ass = False
+
+    '    End If
+
+    'End Sub
+    'Dim ass As Boolean
+
+   
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.GotFocus
+        'ass = True
+        'Button3.PerformClick()
+        TextBox1.Focus()
+        TextBox1.SelectAll()
+        If TextBox1.SelectedText <> "" Then
+            Clipboard.SetDataObject(TextBox1.SelectedText)
+        Else
+            'TextBox2.Text = "No text selected in textBox1"
+        End If
+    End Sub
+
+    Private Sub Label6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub Label3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label5.Click
+
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+End Class
